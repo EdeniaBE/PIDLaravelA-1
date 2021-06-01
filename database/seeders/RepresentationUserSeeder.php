@@ -47,16 +47,40 @@ class RepresentationsTableSeeder extends Seeder
             ],
         ];
 
-        //Insert data in the table
-        foreach ($representations as $data) {
-            $location = Location::firstWhere('slug',$data['location_slug']);
-            $show = Show::firstWhere('slug',$data['show_slug']);
+        //Prepare the data
+        foreach ($representationUsers as &$data){
+            //search the user for a given username
+            $user = User::where([
+                ['login','=',$data['user_login']]
+            ])->first();
 
-            DB::table('representations')->insert([
-                'location_id' => $location->id ?? null,
-                'show_id' => $show->id,
-                'when' => $data['when'],
-            ]);
+            $location = Location::where([
+                ['slug','=',$data['location_slug']]
+            ])->first();
+
+            $show = Show::where([
+                ['slug','=',$data['show_slug']]
+            ])->first();
+
+            $representation = Representation::where([
+                ['location_id','=',$location->id],
+                ['show_id','=',$show->id],
+                ['when','=',$data['representation_when']]
+            ])->first();
+
+            unset($data['user_login']);
+            unset($data['location_slug']);
+            unset($data['show_slug']);
+            unset($data['representation_when']);
+
+            $data['user_id'] = $user->id;
+
+            $data['representation_id'] = $representation->id;
+
         }
+        unset($data);
+
+        DB::table('representation_user')->insert($representationUsers);
+
     }
 }

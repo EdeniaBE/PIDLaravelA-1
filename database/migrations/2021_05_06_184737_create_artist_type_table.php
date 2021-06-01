@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArtiststypeTable extends Migration
+class CreateArtistTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateArtiststypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('artiststype', function (Blueprint $table) {
+        Schema::create('artist_type', function (Blueprint $table) {
             $table->id();
             $table->foreignId('artist_id');
             $table->foreignId('type_id');
@@ -32,6 +32,6 @@ class CreateArtiststypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artiststype');
+        Schema::dropIfExists('artist_type');
     }
 }

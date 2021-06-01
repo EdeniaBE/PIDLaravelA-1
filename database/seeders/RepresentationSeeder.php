@@ -55,8 +55,6 @@ class RepresentationSeeder extends Seeder
             $data['show_id'] = $show->id;
         }
 
-        unset($data);
-
         DB::table('representations')->insert($representations);
     }
 }

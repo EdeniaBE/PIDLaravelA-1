@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use DateTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,24 +19,36 @@ class UserTableSeeder extends Seeder
     {
         //Empty the table first
         Schema::disableForeignKeyConstraints();
-        User::truncate();
+        DB::table('users')->truncate();
         Schema::enableForeignKeyConstraints();
 
         //Define data
         $users = [
+
             [
-                'login'=>'icc',
-                'firstname'=>'AG',
-                'lastname'=>'Julien', 
-                'langue'=>'français',
-                'email'=>'ag-julien@outlook.com',
-                'password'=>'admin',
-                'email_verified_at' => null,
+                'login'=>'Admin',
+                'password'=> Hash::make(123456789),
+                'firstname'=>'AdminFirstname',
+                'lastname'=>'AdminLastname',
+                'name'=>'AdminName',
+                'email'=>'admin@admin.be',
+                'langue'=>'Français',
             ],
+            [
+                'login'=>'AG',
+                'password'=> Hash::make(123456789),
+                'firstname'=>'Anne-Gaelle',
+                'lastname'=>'Julien', 
+                'name'=>'AnneGaelleJulien',
+                'email'=>'ag-julien@outlook.com',
+                'langue'=>'français',
+            ]
         ];
 
         //Insert data in the table
-        foreach ($users as $data) {     
+
+        DB::table('users')->insert($users);
+        /* foreach ($users as $data) {     
             DB::table('users')->insert([
                 'login' => $data['login'],
                 'firstname' => $data['firstname'],
@@ -47,6 +58,6 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make($data['password']),
                 'email_verified_at' => $data['email_verified_at'],
             ]);
-        }
+        } */
     }
 }
