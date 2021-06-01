@@ -48,6 +48,7 @@ class UserTableSeeder extends Seeder
         //Insert data in the table
 
         DB::table('users')->insert($users);
+        
         /* foreach ($users as $data) {     
             DB::table('users')->insert([
                 'login' => $data['login'],

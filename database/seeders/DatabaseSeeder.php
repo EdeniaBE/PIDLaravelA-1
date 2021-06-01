@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
         $this->call([ArtistSeeder::class,
                     LocalitySeeder::class,
                     TypeSeeder::class,
@@ -24,6 +22,9 @@ class DatabaseSeeder extends Seeder
                     RepresentationSeeder::class,
                     ArtistTypeSeeder::class,
                     ArtistTypeShowSeeder::class,
+                    userSeeder::class,
+                    UserRoleSeeder::class,
+                    RepresentationUserSeeder::class
                     ]);
     }
 }
